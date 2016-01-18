@@ -111,9 +111,7 @@
 
 <section data-markdown id="solution">
 ### DevOps est une partie d'un changement plus large
-| Comment ? | Quoi ? | Où ? |
-|-----------|--------|------|
-| DevOps    | Cloud Apps + Microservices | Containers |
+![](images/qui-quoi-comment.svg)
 </section>
 
 </section>
@@ -124,24 +122,61 @@
 					<section id="Docker">
 						<h2>Petit rappel sur <img src="images/vector_h-dark-trans.svg" alt="Docker" style="background:none; border:none; box-shadow:none; width:70%;" /></h2>
 					</section>
-         		<section id="CoreOS-system">
+         		<section id="hypervsdocker">
                         <h3>Hyperviseur vs Docker</h3>
                         <img src="images/HypervizorVSdocker.png" style="background:none; border:none; box-shadow:none; width:180%;" />
         		 </section>
+		 		<section  data-markdown id="dockertools">
+### Les outils Docker libres
+* ####Docker Moteur/Client
+ *Le moteur et le client pour utiliser docker en cli.*
 
+* ####Docker Machine
+ *Permet de créer automatiquement un environnement virtuel pour lancer Docker.*
+
+* ####Docker Compose
+ *Permet de lancer des applications multi-containers.*
+
+* ####Docker Swarm
+ *Permet de gérer les containers Docker dans un cluster.*
+        		 </section>
+		 		<section  data-markdown id="dockertools2">
+### Les outils Docker libres
+ 
+* ####Docker Registry
+ *Application de gestion des images locales.*
+
+* ####Notary 
+*Outils permettant la signature des images par le fournisseur et la vérification de l'intégrité par le client.*
+
+* ####libnetwork
+*Outil d'abstraction réseau permettant la communication et l'isolation entre les containers et ceci même sur des nœuds différents.*
+        		 </section>
+
+
+		 		<section  id="dockers-stage">
+					<h3>Docker Moteur/Client</h3>
+ <img src="images/docker-stages.png" alt="etcd" style="background:none; border:none; box-shadow:none; " />
+        		 </section>
 		 		<section  data-markdown id="pourquoi-docker">
 ### Pourquoi utilise-t-on Docker ?
 * Distribution des applications facilitée.
 * Comportement identique des applications en Dev/Qualif/Prod.
 * Déploiement, lancement et arrêt rapide.
 * Linux et Windows (en preview dans Windows Server 2016)
- * Peut se lancer également dans une VM légère avec Boot2docker.
 * Permet de reconstruire un container à partir d'un simple fichier Dockerfiles.
-* Gestion des containers avec peu d'outils qui seront identique partout.
+* Gestion des containers avec peu d'outils, identique sur toutes les plateformes.
+* Des API disponibles pour piloter l'ensemble depuis d'autres applications.
          		</section>
+
+         		</section>
+<!-- ########################################################################################## -->
+<!-- ########################################################################################## -->
+         		<section>
+
          <section id="twelvefactor">
              <h3>The Twelve Factors</h3>
-             <p>La popularité de Docker vient en partie de sa compatibilité avec les règles 12Factors.</p>
+             <p>La popularité de Docker vient en partie de sa compatibilité avec les règles 12 Factors.</p>
              <center>
              <table>
                  <tr>
@@ -170,14 +205,110 @@
         </center>
         <p><href a="http://12factor.net">http://12factor.net</href> </p>
           </section>
-    
+                                            <section id="util-12factor-codebase">
+                                            <h3>Codebase</h3>
+                                                <ul>
+                                                        <li >Tout code doit être géré par un logiciel de suivi de version (git, mercurial, ...).</li>
+                                                        <li >Une application = code source </li>
+                	                        </ul>
+                                        </section>
+                                        <section id="util-12factor-dep">
+			                    <h3>Dependencies</h3>
+                                                <ul>
+                                                        <li >Toutes les dépendances doivent être clairement précisées.</li>
+                                                        <li >Le système cible n'est pas censé contenir de programme pré-installé. </li>
+                                                        <li >Pas de dépendances implicites.</li>
+                	                        </ul>
+                                        </section>
+                                        <section id="util-12factor-config">
+                                            <h3>Config</h3>
+                                                <ul>
+                                                        <li >Est considéré comme configuration, tous ce qui diffère d'un environnement à l'autre (dev, qualif, prod, autre site). </li>
+                                                        <li >Tout élément de configuration doit être passé par des variables d'environnement.</li>
+                                                        <li >Il ne doit y avoir absolument aucune référence à la configuration dans le code.</li>
+                	                        </ul>
+                                        </section>
+                                        <section id="util-12factor-backing">
+						<h3>Backing Services</h3>
+                                                <ul>
+                                                        <li >Un <i>backing service </i> est une ressource externe au conteneur (base mysql, smtp, activemq, memcache,&nbsp;...).</li>
+                                                        <li >L'accès à ces ressources doit être passé en paramètre.</li>
+							<li >Pas de distinction entre les services locaux et distants.</li>
+                	                        </ul>
+                                        </section>
+                                        <section id="util-12factor-build">
+                                            <h3>Build, release, run</h3>
+                                                <ul>
+                                                        <li >On recrée l'application et l'environnement avant tout déploiement d'une nouvelle version.</li>
+                                                        <li >Aucune modification n'est apportée sur l'application déployée. </li>
+                                                        <li >Chaque version déployée a un numéro de version unique (timestamp, numero de commit, ...).</li>
+                	                        </ul>
+                                        </section>
+                                        <section id="util-12factor-process">
+                                            <h3>Processes</h3>
+                                                <ul>
+                                                        <li >L'application est exécutée dans l'environnement d'exécution en tant qu'un ou plusieurs processus.</li>
+							<li >Toutes les données doivent être stockées dans une ressource externe (base de données).</li>
+                                                        <li >Les variables de sessions utilisateurs ne doivent jamais être stockées localement. </li>
+                	                        </ul>
+                                        </section>
+                                        <section id="util-12factor-port">
+                                            <h3>Port binding</h3>
+                                                <ul>
+                                                        <li >L'application fournit un service qui écoute sur un port.</li>
+                	                        </ul>
+                                        </section>
+                                        <section id="util-12factor-concurrency">
+                                            <h3>Concurrency</h3>
+                                                <ul>
+							<li >Chaque application peut être mise à l'echelle. Les conteneurs peuvent être lancés x fois pour répartir la charge.</li>
+                                                        <li >Le programme dans le conteneur ne doit pas être lancé en tâche de fond.</li>
+                                                        <li >L'arrêt du programme entraîne l'arrêt du conteneur.</li>
+                	                        </ul>
+                                        </section>
+                                        <section id="util-12factor-dispo">
+                                            <h3>Disposability</h3>
+                                                <ul>
+                                                        <li >Le conteneur doit être jetable.</li>
+                                                        <li >Il doit donc pouvoir être lancé très rapidement. </li>
+                                                        <li >Un arrêt intempestif ne doit pas compromettre les données.</li>
+                	                        </ul>
+                                        </section>
+                                        <section id="util-12factor-devprod">
+                                            <h3>Dev/prod parity</h3>
+                                                <ul>
+                                                        <li >Le développeur doit pouvoir déployer rapidement le code qu'il vient de finir d'écrire.</li>
+                                                        <li >Le développeur doit être plus proche du déploiement (DevOps).</li>
+                                                        <li >Maintenir le développement et la production aussi semblables que possible en utilisant les mêmes outils.</li>
+                                                        <li >Éviter de prendre des backends différents en prod et en dev (ex: base de données, ...) pour limiter les surprises en production.</li>
+                	                        </ul>
+                                        </section>
+                                        <section id="util-12factor-logs">
+                                            <h3>Logs</h3>
+                                                <ul>
+                                                        <li >Les applications doivent externaliser leurs journaux pour la visualisation et l'archivage à long terme (ELK, Spunk, rsyslog ...).</li>
+                                                        <li >Les journaux peuvent s'afficher dans la sortie standard de l'application, mais pas dans un fichier du conteneur.</li>
+                	                        </ul>
+                                        </section>
+                                        <section id="util-12factor-admin">
+                                            <h3>Admin process</h3>
+                                                <ul>
+                                                        <li >Les commandes d'administration doivent s'exécuter dans un environnement identique aux autres processus d'exploitation.</li>
+							<li >Même conteneur, mêmes variables d'environnement, mais en mode interactif.</li>
+                	                        </ul>
+                                        </section>
+                                        <section id="mircoservice">
+                                            <h2>12-factors c'est bien mais...</h2>
+                                            <h3>... Comment les mettre en œuvre de façon efficace.</h3>
+                                        </section>
+ 
 </section>
 <!-- ########################################################################################## -->
 <!-- ########################################################################################## -->
 <section>
 
 					<section data-markdown id="Microservice">
-# Micro-services
+## Microservices
 					</section>
 			        <section  data-markdown>
 ### Juste un Buzz ?
@@ -233,6 +364,7 @@ Il doit offire une fonction complète avec des dépendances minimales avec les a
 * Augmentation du trafic réseau.
 * Coût initial plus élevé.
 * Sécurité du réseau
+
 Tous ces points peuvent être résolut par l'utilisation d'outils adéquats.
                     </section>
 			        <section  data-markdown>
@@ -240,8 +372,6 @@ Tous ces points peuvent être résolut par l'utilisation d'outils adéquats.
 * La gouvernance centralisé a tendance à standardiser les technos.
 * Tous les problèmes ne sont pas des clous. Chaque solution n'est pas le marteau
 * Plutôt que d'utiliser un ensemble de normes définies écrit quelque part sur le papier, on préfère l'idée de produire des outils utiles que d'autres développeurs peuvent utiliser pour résoudre des problèmes similaires à ceux auxquels ils sont confrontés.
-                    </section>
-			        <section  data-markdown>
                     </section>
 					<section data-markdown id="Recap">
 |Développement Conventionnelle |Cloud "Native" Pattern|
@@ -263,17 +393,19 @@ Tous ces points peuvent être résolut par l'utilisation d'outils adéquats.
 						<h2>Solutions d'Orchestration OpenSource</h2>
 					</section>
 					<section data-markdown>
-### Docker Machine/Compose/Swarm [http://www.docker.com](http://www.docker.com)
+### Docker Machine/Compose/Swarm 
+[http://www.docker.com](http://www.docker.com)
 
 #### Avantages
-* Outils pleinement intégrés à Docker
+* Outils certifiés compatible Docker ;-)
 
 #### Inconvénients
 * Pas d'interface graphique libre (Docker Universal Control Plane)
 * Difficiles à utiliser pour un déployement à grand échelle.
 					</section>
 					<section data-markdown>
-### Kubernetes [http://k8s.io](http://k8s.io)
+### Kubernetes
+[http://k8s.io](http://k8s.io)
 
 #### Avantages
 * Utilisable en production (v1.1)
@@ -286,11 +418,13 @@ Tous ces points peuvent être résolut par l'utilisation d'outils adéquats.
 * API différente de Docker
 					</section>
 					<section data-markdown>
-### Apache Mesos [http://mesos.apache.org/](http://mesos.apache.org/)
+### Apache Mesos 
+[http://mesos.apache.org/](http://mesos.apache.org/)
 
 #### Avantages
 * Permet de gérer plus de 10 000 nœuds. 
 * Produits plus ancien que Docker.
+* Vient du monde cluster
 
 #### Inconvénients
 * Complexité de mise en œuvre (nombreuses briques)
@@ -298,7 +432,8 @@ Tous ces points peuvent être résolut par l'utilisation d'outils adéquats.
 * Adapté au monstre du Web
 					</section>
 					<section data-markdown>
-### Openshift Origin v3 [http://www.openshift.org](http://www.openshift.org)
+### Openshift Origin v3 
+[http://www.openshift.org](http://www.openshift.org)
 
 #### Avantages
 * Très bon produit PaaS
@@ -310,43 +445,41 @@ Tous ces points peuvent être résolut par l'utilisation d'outils adéquats.
 * Outil Redhat adapter à Docker
 					</section>
 					<section data-markdown>
-### Rancher - [http://rancher.com](http://rancher.com)
+### Rancher 
+[http://rancher.com](http://rancher.com)
 
 #### Avantages
 * Simplicté d'utilisation et de mise en œuvre
 * Utilisation des API Docker, de Docker-compose
 * Permet de déployer des containers en cloud privé/publique
 * Connexion ldap, local, github
+
 #### Inconvénients
 * Solution un peu jeune
 					</section>
 					<section data-markdown>
-### Kontena - [http://www.kontena.io/](http://www.kontena.io/)
+### Kontena
+[http://www.kontena.io/](http://www.kontena.io/)
 #### Avantages
 * Proche de Rancher mais sans interface Graphique
 * Utilisation des API Docker, de Docker-compose
 * Gestion registre Privé
 * Support clouds publics (AWS, Azure, DigitalOcean) + BareMetal
 * Gestion des containers stateful pour les BDD.
+
 #### Inconvénients
 * Outils + Dev que Ops
 * Solution un peu jeune
 					</section>
-					<section data-markdown>
-### 
-					</section>
-					<section data-markdown>
-### 
-					</section>
-
-
          </section>
 
  <!-- ########################################################################################## -->
          <section>
                                         <section data-markdown id="question">
-                                             # Questions ?
-                                        </section>
+# Questions ?
+
+### Merci
+                                     </section>
          </section>
  <!-- ########################################################################################## -->
 			</div>
