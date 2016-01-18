@@ -72,8 +72,8 @@
                                           <h2>En 45 minutes pas plus</h2>
 
                                           <ol>
-					      <li>Le constat</li>
-					      <li>Petit rappel sur Docker</li>
+					      <li>Le constat.</li>
+					      <li>Petit rappel sur Docker.</li>
 					      <li>Les Microservices, c'est quoi ?</li>
 					      <li>Pourquoi migrer vers les Microservices ?</li>
 					      <li>Quels outils pour orchestrer ceci ?</li>
@@ -326,10 +326,10 @@
 * IHM, core, accès aux BDD.
 * Chaque modification nécessite de redéployer la totalité de l'application.
 * Chaque modification nécessite de retester l'ensemble de l'application.
-* Difficile de garder au file du temps une bonne structure modulaire.
+* Difficile de garder au fil du temps une bonne structure modulaire.
 * Mise à l'echelle couteuse.
-* Manque de diversité technologique
-* Pas facile de changer un composant
+* Manque de diversité technologique.
+* Pas facile de changer un composant.
                     </section>
 			        <section  data-markdown>
 ### Les Applis Microservices
@@ -352,9 +352,13 @@ Il doit offire une fonction complète avec des dépendances minimales avec les a
                     </section>
 			        <section  data-markdown>
 ### Avantages 
-* Possibilité d'utiliser différents langages de programmation
-* Facilite le travail en équipe
-* Facilité de monitoré et d'optimisation de façon indépendante chaque Microservice.  
+* Facilite le travail en équipe.
+* Augmente la qualité globale des applications.
+* Permet d'utiliser le meilleur langage de programmation en fonction de la problématique.
+* Permet d'automatiser les tests, la qualification et le déploiement en production.
+* Chaque Microservice peut être mise à l'échelle indépendament et peut être optimisé sans affecter le reste de l'application.
+* Augmentation de la robustesse de l'architecture, de la tolérance aux pannes.
+
                     </section>
 			        <section  data-markdown>
 ### Inconvénients 
@@ -363,27 +367,22 @@ Il doit offire une fonction complète avec des dépendances minimales avec les a
 * Application polyglotte.
 * Augmentation du trafic réseau.
 * Coût initial plus élevé.
-* Sécurité du réseau
+* Sécurité des communications entre les Applis.
 
-Tous ces points peuvent être résolut par l'utilisation d'outils adéquats.
+*Tous ces points peuvent être résolut par l'utilisation d'outils adéquats et d'un peu d'huile de coude.*
                     </section>
+
 			        <section  data-markdown>
-### La gouvernance décentralisée
-* La gouvernance centralisé a tendance à standardiser les technos.
-* Tous les problèmes ne sont pas des clous. Chaque solution n'est pas le marteau
-* Plutôt que d'utiliser un ensemble de normes définies écrit quelque part sur le papier, on préfère l'idée de produire des outils utiles que d'autres développeurs peuvent utiliser pour résoudre des problèmes similaires à ceux auxquels ils sont confrontés.
-                    </section>
-					<section data-markdown id="Recap">
-|Développement Conventionnelle |Cloud "Native" Pattern|
-|------------------------|----------------------|
-|BDD SQL Cenralisée| BDD Distribuée Key/Value NoSQL|
-|Session en mémoire| Memcached/Redis Session|
-|Protocols connecté |Protocols tolérants à la latence|
-|Gros objets complexes |Objets Sérialisable légers|
-|Composant = fichier jar| Composant est un Service|
-|Java, .NET| JavaScript, Python, Ruby, node.js, Go,...|
+### La motivation qui pousse à utiliser les Microservices
+* Frustration de na pas obtenir le résultat souhaité avec une architecture monolithique.
+* Arrivé sur le marché d'outils permettant le déploiement des applications Microservices avec plus de facilité.
+* Large adoption des solution d'infrastructure en tant que service (IaaS).
+* Le passage des grosses sociétés du Web vers des architectures complètement Microservices.
+
+*Dans un avenir plus ou moins proche les applications monolithiques ne serviront qu'au prototypage.*
 					</section>
-         </section>
+				
+				</section>
 	   
 	 
 <!-- ########################################################################################## -->
@@ -400,8 +399,8 @@ Tous ces points peuvent être résolut par l'utilisation d'outils adéquats.
 * Outils certifiés compatible Docker ;-)
 
 #### Inconvénients
-* Pas d'interface graphique libre (Docker Universal Control Plane)
-* Difficiles à utiliser pour un déployement à grand échelle.
+* Pas d'interface graphique libre (*Docker Universal Control Plane* n'est pas libre.)
+* Difficiles à utiliser pour un déployement à grand échelle sans développer ses propres outils d'administration.
 					</section>
 					<section data-markdown>
 ### Kubernetes
@@ -449,27 +448,29 @@ Tous ces points peuvent être résolut par l'utilisation d'outils adéquats.
 [http://rancher.com](http://rancher.com)
 
 #### Avantages
-* Simplicté d'utilisation et de mise en œuvre
-* Utilisation des API Docker, de Docker-compose
-* Permet de déployer des containers en cloud privé/publique
-* Connexion ldap, local, github
+* Simplicté d'utilisation et de mise en œuvre.
+* Utilisation des API Docker, des scripts Docker-compose.
+* Permet de déployer des containers en cloud privé/publique + BareMetal.
+* Gestion centralisé multi-environnement.
+* Connexion ldap, local, github.
 
 #### Inconvénients
-* Solution un peu jeune
+* Solution un peu jeune.
+* Pas de retour sur un déploiement à grande echelle.
 					</section>
 					<section data-markdown>
 ### Kontena
 [http://www.kontena.io/](http://www.kontena.io/)
 #### Avantages
-* Proche de Rancher mais sans interface Graphique
-* Utilisation des API Docker, de Docker-compose
-* Gestion registre Privé
-* Support clouds publics (AWS, Azure, DigitalOcean) + BareMetal
+* Proche de Rancher mais sans interface Graphique.
+* Utilisation des API Docker, des scripts Docker-compose.
+* Gestion registre Privé.
+* Support clouds publics (AWS, Azure, DigitalOcean) + BareMetal.
 * Gestion des containers stateful pour les BDD.
 
 #### Inconvénients
-* Outils + Dev que Ops
-* Solution un peu jeune
+* Outils + Dev que Ops.
+* Solution un peu jeune, pas prêt pour la production.
 					</section>
          </section>
 
