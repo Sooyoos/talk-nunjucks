@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="fr">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Architecture Microservices avec Docker</title>
+
+		<meta name="description" content="Architecture Microservices avec Docker">
+		<meta name="author" content="Gauthier C.">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="reveal.js/css/theme/sky.css" id="theme">
+		<link rel="shortcut icon" href="./images/favicon.png">
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+		<style>
+			.reveal h3 {
+				text-transform: none;
+			}
+			#shell {
+				color: #255a7c;
+				font-family: Monospace;
+				font-size: 0.8em;
+			}
+			.reveal thead {
+				font-size: 0.85em;
+			}
+			.reveal td {
+				font-size: 0.8em;
+			}
+			.reveal section img {
+				background:none; border:none; box-shadow:none;
+			}
+		</style>
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+		<!--[if lt IE 9]>
+		<script src="reveal.js/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section id="debut">
+                                        <img src="images/docker.png" style="background:none; border:none; box-shadow:none;width:60%;" />
+					<!--<h1>Core<span style="color:#f35b69">O</span><span style="color:#6d9eeb">S</span></h1>-->
+					<h3>Architecture Microservices avec Docker</h3>
+					<p><small><small>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licence Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Présentation </span> de <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName"><a href="http://twitter.com/CattGr">@CattGr</a></span> est mise à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">licence Creative Commons Attribution 4.0 International</a></small></small>
+					</p>
+				</section>
+
+<!-- ########################################################################################## -->
+                          
+                                <section id="abstract">
+                                          <h2>En 45 minutes pas plus</h2>
+
+                                          <ol>
+					      <li>Le constat</li>
+					      <li>Petit rappel sur Docker</li>
+					      <li>Les Microservices, c'est quoi ?</li>
+					      <li>Pourquoi migrer vers les Microservices ?</li>
+					      <li>Quels outils pour orchestrer ceci ?</li>
+                                          </ol>
+                                </section>
+
+<!-- ########################################################################################## -->
+<!-- ########################################################################################## -->
+<section id="constat">
+					<section data-markdown id="Constat1">
+## Le constat
+* Les géants du web ont changé leurs méthodes de développement et de déploiement depuis plusieurs années pour être plus efficace.
+* Les petites entreprises innovantes utilisent maintenant les mêmes méthodes.
+* Docker, Devops, Orchestration, Microservices,  ...
+* Et nous ?
+					</section>
+
+       <!-- ########################################################################################## -->
+					<section data-markdown id="Concept">
+						## Changement de vitesse
+|Datacenter                 | | Virtualisation            | | Docker 		     |
+|---------------------------|-|---------------------------|-|--------------------------------|
+| ![](images/datacenter.png)| | ![](images/virtu.png)     | | ![](images/docker-concept.png) |
+|Déploiement dans le mois   | &#8680; |Déploiement dans la minute| &#8680; |Déploiement dans la seconde |
+|Pendant des années         | |Pendant des mois           | |Pendant quelques heures/minutes     |
+|Développement en cascade   | | Agile                     | | DevOps                         |
+</section>
+
+<section id="dev-cycle">
+
+		<h3> Plus rapide et de meilleur qualité </h3>
+        <img src="images/dev-cycle.png" style="background:none; border:none; box-shadow:none; width:180%;" />
+
+</section>
+
+<section data-markdown id="solution">
+### DevOps est une partie d'un changement plus large
+| Comment ? | Quoi ? | Où ? |
+|-----------|--------|------|
+| DevOps    | Cloud Apps + Microservices | Containers |
+</section>
+
+</section>
+<!-- ########################################################################################## -->
+<!-- ########################################################################################## -->
+ 
+         <section>
+					<section id="Docker">
+						<h2>Petit rappel sur <img src="images/vector_h-dark-trans.svg" alt="Docker" style="background:none; border:none; box-shadow:none; width:70%;" /></h2>
+					</section>
+         		<section id="CoreOS-system">
+                        <h3>Hyperviseur vs Docker</h3>
+                        <img src="images/HypervizorVSdocker.png" style="background:none; border:none; box-shadow:none; width:180%;" />
+        		 </section>
+
+		 		<section  data-markdown id="pourquoi-docker">
+### Pourquoi utilise-t-on Docker ?
+* Distribution des applications facilitée.
+* Comportement identique des applications en Dev/Qualif/Prod.
+* Déploiement, lancement et arrêt rapide.
+* Linux et Windows (en preview dans Windows Server 2016)
+ * Peut se lancer également dans une VM légère avec Boot2docker.
+* Permet de reconstruire un container à partir d'un simple fichier Dockerfiles.
+* Gestion des containers avec peu d'outils qui seront identique partout.
+         		</section>
+         <section id="twelvefactor">
+             <h3>The Twelve Factors</h3>
+             <p>La popularité de Docker vient en partie de sa compatibilité avec les règles 12Factors.</p>
+             <center>
+             <table>
+                 <tr>
+                    <td>
+             <ol>
+                 <li><h5>Codebase</h5></li>
+                 <li><h5>Dependencies</h5></li>
+                 <li><h5>Config</h5></li>
+                 <li><h5>Backing Services</h5></li>
+                 <li><h5>Build, release, run</h5></li>
+                 <li><h5>Processes</h5></li>
+             </ol>
+                    </td>
+                    <td>
+             <ol start="7">
+                 <li><h5>Port binding</h5></li>
+                 <li><h5>Concurrency</h5></li>
+                 <li><h5>Disposability</h5></li>
+                 <li><h5>Dev/prod parity</h5></li>
+                 <li><h5>Logs</h5></li>
+                 <li><h5>Admin process</h5></li>
+             </ol>
+                    </td>
+                 </tr>
+            </table>
+        </center>
+        <p><href a="http://12factor.net">http://12factor.net</href> </p>
+          </section>
+    
+</section>
+<!-- ########################################################################################## -->
+<!-- ########################################################################################## -->
+<section>
+
+					<section data-markdown id="Microservice">
+# Micro-services
+					</section>
+			        <section  data-markdown>
+### Juste un Buzz ?
+* Micro-Web-Services en 2005
+* Définition Microservices en 2011
+* Microservices c'est comme SOA mais seulement les bonnes parties.
+					</section>
+			        <section  data-markdown>
+### Les applications monolithiques
+![](images/Monolithique.svg)
+                    </section>
+			        <section  data-markdown>
+### Les applications monolithiques
+* Applications N-tiers.
+* IHM, core, accès aux BDD.
+* Chaque modification nécessite de redéployer la totalité de l'application.
+* Chaque modification nécessite de retester l'ensemble de l'application.
+* Difficile de garder au file du temps une bonne structure modulaire.
+* Mise à l'echelle couteuse.
+* Manque de diversité technologique
+* Pas facile de changer un composant
+                    </section>
+			        <section  data-markdown>
+### Les Applis Microservices
+![](images/Microservices.svg)
+                    </section>
+			        <section  data-markdown>
+### Les Microservices
+#### Élastique
+Un Microservice doit pouvoir être déployé un nombre de fois qui varie en fonction de la demande, et ce, indépendamment des autres services dans la même application.
+#### Résilent
+Un Microservice doit échouer sans affecter d'autres services dans la même application.
+                    </section>
+			        <section  data-markdown>
+### Les Microservices
+#### API
+Les Microservices doivent avoir une API stable et cohérente.
+#### Minimal mais complet
+Un Microservice doit être le plus petit possible mais pas plus petit.
+Il doit offire une fonction complète avec des dépendances minimales avec les autres services.
+                    </section>
+			        <section  data-markdown>
+### Avantages 
+* Possibilité d'utiliser différents langages de programmation
+* Facilite le travail en équipe
+* Facilité de monitoré et d'optimisation de façon indépendante chaque Microservice.  
+                    </section>
+			        <section  data-markdown>
+### Inconvénients 
+* Nécessite un bon niveau d'expertise DevOps. 
+* Gestion décentralisée des données.
+* Application polyglotte.
+* Augmentation du trafic réseau.
+* Coût initial plus élevé.
+* Sécurité du réseau
+Tous ces points peuvent être résolut par l'utilisation d'outils adéquats.
+                    </section>
+			        <section  data-markdown>
+### La gouvernance décentralisée
+* La gouvernance centralisé a tendance à standardiser les technos.
+* Tous les problèmes ne sont pas des clous. Chaque solution n'est pas le marteau
+* Plutôt que d'utiliser un ensemble de normes définies écrit quelque part sur le papier, on préfère l'idée de produire des outils utiles que d'autres développeurs peuvent utiliser pour résoudre des problèmes similaires à ceux auxquels ils sont confrontés.
+                    </section>
+			        <section  data-markdown>
+                    </section>
+					<section data-markdown id="Recap">
+|Développement Conventionnelle |Cloud "Native" Pattern|
+|------------------------|----------------------|
+|BDD SQL Cenralisée| BDD Distribuée Key/Value NoSQL|
+|Session en mémoire| Memcached/Redis Session|
+|Protocols connecté |Protocols tolérants à la latence|
+|Gros objets complexes |Objets Sérialisable légers|
+|Composant = fichier jar| Composant est un Service|
+|Java, .NET| JavaScript, Python, Ruby, node.js, Go,...|
+					</section>
+         </section>
+	   
+	 
+<!-- ########################################################################################## -->
+
+         <section>
+					<section id="Orchest">
+						<h2>Solutions d'Orchestration OpenSource</h2>
+					</section>
+					<section data-markdown>
+### Docker Machine/Compose/Swarm [http://www.docker.com](http://www.docker.com)
+
+#### Avantages
+* Outils pleinement intégrés à Docker
+
+#### Inconvénients
+* Pas d'interface graphique libre (Docker Universal Control Plane)
+* Difficiles à utiliser pour un déployement à grand échelle.
+					</section>
+					<section data-markdown>
+### Kubernetes [http://k8s.io](http://k8s.io)
+
+#### Avantages
+* Utilisable en production (v1.1)
+* Support plusieurs type de Containers (Docker, Rkt, Hyper)
+* Permet de gérer des milliers de nœuds. 
+* Produits plus ancien que Docker
+
+#### Inconvénients
+* Utilise ses propres outils réseau.
+* API différente de Docker
+					</section>
+					<section data-markdown>
+### Apache Mesos [http://mesos.apache.org/](http://mesos.apache.org/)
+
+#### Avantages
+* Permet de gérer plus de 10 000 nœuds. 
+* Produits plus ancien que Docker.
+
+#### Inconvénients
+* Complexité de mise en œuvre (nombreuses briques)
+* Marathon couche d'abstraction pour faire tourner Docker
+* Adapté au monstre du Web
+					</section>
+					<section data-markdown>
+### Openshift Origin v3 [http://www.openshift.org](http://www.openshift.org)
+
+#### Avantages
+* Très bon produit PaaS
+* Basé sur Kubernetes
+* Intégration à Eclipse
+
+#### Inconvénients
+* Outils + Dev que Ops
+* Outil Redhat adapter à Docker
+					</section>
+					<section data-markdown>
+### Rancher - [http://rancher.com](http://rancher.com)
+
+#### Avantages
+* Simplicté d'utilisation et de mise en œuvre
+* Utilisation des API Docker, de Docker-compose
+* Permet de déployer des containers en cloud privé/publique
+* Connexion ldap, local, github
+#### Inconvénients
+* Solution un peu jeune
+					</section>
+					<section data-markdown>
+### Kontena - [http://www.kontena.io/](http://www.kontena.io/)
+#### Avantages
+* Proche de Rancher mais sans interface Graphique
+* Utilisation des API Docker, de Docker-compose
+* Gestion registre Privé
+* Support clouds publics (AWS, Azure, DigitalOcean) + BareMetal
+* Gestion des containers stateful pour les BDD.
+#### Inconvénients
+* Outils + Dev que Ops
+* Solution un peu jeune
+					</section>
+					<section data-markdown>
+### 
+					</section>
+					<section data-markdown>
+### 
+					</section>
+
+
+         </section>
+
+ <!-- ########################################################################################## -->
+         <section>
+                                        <section data-markdown id="question">
+                                             # Questions ?
+                                        </section>
+         </section>
+ <!-- ########################################################################################## -->
+			</div>
+
+		</div>
+
+		<script src="reveal.js/lib/js/head.min.js"></script>
+		<script src="reveal.js/js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'convex', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+					{ src: 'reveal.js/plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
