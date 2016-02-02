@@ -223,7 +223,7 @@
                                         <section id="util-12factor-config">
                                             <h3>Config</h3>
                                                 <ul>
-                                                        <li >Est considéré comme configuration, tous ce qui diffère d'un environnement à l'autre (dev, qualif, prod, autre site). </li>
+                                                        <li >Est considéré comme configuration, tout ce qui diffère d'un environnement à l'autre (dev, qualif, prod, autre site). </li>
                                                         <li >Tout élément de configuration doit être passé par des variables d'environnement.</li>
                                                         <li >Il ne doit y avoir absolument aucune référence à la configuration dans le code.</li>
                 	                        </ul>
@@ -353,7 +353,7 @@ Un Microservice doit échouer sans affecter d'autres services dans la même appl
 Les Microservices doivent avoir une API stable, cohérente et bien documentée. [https://openapis.org/](https://openapis.org/)
 #### Minimal mais complet
 Un Microservice doit être le plus petit possible mais pas plus petit.
-Il doit offire une fonction complète avec des dépendances minimales avec les autres services.
+Il doit offrir une fonction complète avec des dépendances minimales avec les autres services.
                     </section>
 			        <section  data-markdown>
 ### Avantages 
@@ -361,7 +361,7 @@ Il doit offire une fonction complète avec des dépendances minimales avec les a
 * Augmente la qualité globale des applications.
 * Permet d'utiliser le meilleur langage de programmation en fonction de la problématique.
 * Permet d'automatiser les tests, la qualification et le déploiement en production.
-* Chaque Microservice peut être mise à l'échelle indépendament et peut être optimisé sans affecter le reste de l'application.
+* Chaque Microservice peut être mis à l'échelle indépendament et peut être optimisé sans affecter le reste de l'application.
 * Augmentation de la robustesse de l'architecture, de la tolérance aux pannes.
 
                     </section>
@@ -374,14 +374,14 @@ Il doit offire une fonction complète avec des dépendances minimales avec les a
 * Coût initial plus élevé.
 * Sécurité des communications entre les Applis.
 
-*Tous ces points peuvent être résolut par l'utilisation d'outils adéquats et d'un peu d'huile de coude.*
+*Tous ces points peuvent être résolus par l'utilisation d'outils adéquats et d'un peu d'huile de coude.*
                     </section>
 
 			        <section  data-markdown>
 ### La motivation qui pousse à utiliser les Microservices
-* Frustration de na pas obtenir le résultat souhaité avec une architecture monolithique.
-* Arrivé sur le marché d'outils permettant le déploiement des applications Microservices avec plus de facilité.
-* Large adoption des solution d'infrastructure en tant que service (IaaS).
+* Frustration de ne pas obtenir le résultat souhaité avec une architecture monolithique.
+* Arrivée sur le marché d'outils permettant le déploiement des applications Microservices avec plus de facilité.
+* Large adoption des solutions d'infrastructure en tant que service (IaaS).
 * Le passage des grosses sociétés du Web vers des architectures complètement Microservices.
 
 *Dans un avenir plus ou moins proche les applications monolithiques ne serviront qu'au prototypage.*
@@ -405,7 +405,7 @@ Il doit offire une fonction complète avec des dépendances minimales avec les a
 
 #### Inconvénients
 * Pas d'interface graphique libre (*Docker Universal Control Plane* n'est pas libre.)
-* Difficiles à utiliser pour un déployement à grand échelle sans développer ses propres outils d'administration.
+* Difficiles à utiliser pour un déploiement à grande échelle sans développer ses propres outils d'administration.
 					</section>
 					<section data-markdown>
 ### Kubernetes
@@ -413,9 +413,9 @@ Il doit offire une fonction complète avec des dépendances minimales avec les a
 
 #### Avantages
 * Utilisable en production (v1.1)
-* Support plusieurs type de Containers (Docker, Rkt, Hyper)
+* Supporte plusieurs types de Containers (Docker, Rkt, Hyper)
 * Permet de gérer des milliers de nœuds. 
-* Produits plus ancien que Docker
+* Produit plus ancien que Docker
 
 #### Inconvénients
 * Utilise ses propres outils réseau.
@@ -453,10 +453,10 @@ Il doit offire une fonction complète avec des dépendances minimales avec les a
 [http://rancher.com](http://rancher.com)
 
 #### Avantages
-* Simplicté d'utilisation et de mise en œuvre.
+* Simplicité d'utilisation et de mise en œuvre.
 * Utilisation des API Docker, des scripts Docker-compose.
-* Permet de déployer des containers en cloud privé/publique + BareMetal.
-* Gestion centralisé multi-environnement.
+* Permet de déployer des containers en cloud privé/public + BareMetal.
+* Gestion centralisée multi-environnements.
 * Connexion ldap, local, github.
 
 #### Inconvénients
@@ -475,7 +475,7 @@ Il doit offire une fonction complète avec des dépendances minimales avec les a
 
 #### Inconvénients
 * Outils + Dev que Ops.
-* Solution un peu jeune, pas prêt pour la production.
+* Solution un peu jeune, pas prête pour la production.
 					</section>
          </section>
 
