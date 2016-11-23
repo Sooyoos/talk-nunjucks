@@ -4,10 +4,10 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Architecture Microservices avec Docker</title>
+		<title>DevOps méthodes</title>
 
-		<meta name="description" content="Architecture Microservices avec Docker">
-		<meta name="author" content="Gauthier C.">
+		<meta name="description" content="DevOpsp">
+		<meta name="author" content="Sooyoos">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -15,7 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 		<link rel="stylesheet" href="reveal.js/css/reveal.css">
-		<link rel="stylesheet" href="reveal.js/css/theme/sky.css" id="theme">
+		<link rel="stylesheet" href="reveal.js/css/theme/league.css" id="theme">
 		<link rel="shortcut icon" href="./images/favicon.png">
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
@@ -58,112 +58,275 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section id="debut" >
-                                        <img src="images/docker.png" style="background:none; border:none; box-shadow:none;width:60%;" />
+                    <img src="images/docker.png" style="background:none; border:none; box-shadow:none;width:60%;" />
 					<!--<h1>Core<span style="color:#f35b69">O</span><span style="color:#6d9eeb">S</span></h1>-->
-					<h3>Architecture Microservices avec Docker</h3>
+					<h3>DevOps </h3>
 					<p><small><small>
-<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licence Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Présentation </span> de <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName"><a href="http://twitter.com/CattGr">@CattGr</a></span> est mise à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">licence Creative Commons Attribution 4.0 International</a></small></small>
+by guillaume sondag - sooyoos</small></small>
+					</p>
+
+					<p><small><small>
+<a href="www.sooyoos.com">site</a> <a href="https://www.facebook.com/sooyoos">facebook</a> <a href="https://twitter.com/_sooyoos_">twitter</a></small></small>
 					</p>
 				</section>
-
 <!-- ########################################################################################## -->
                           
                                 <section id="abstract" >
-                                          <h2>En 45 minutes ...</h2>
+                                          <h2>On va parler de...</h2>
 
                                           <ol>
-					      <li>Le constat.</li>
-					      <li>Petit rappel sur Docker.</li>
-					      <li>Les Microservices, c'est quoi ?</li>
-					      <li>Pourquoi migrer vers les Microservices&nbsp;?</li>
-					      <li>Quels outils pour orchestrer ceci ?</li>
+					      <li>DevOps ça veut dire quoi ?</li>
+					      <li>Les grands principes</li>
+					      <li>Les outils</li>
+					      <li>Docker</li>
+					      <li>L'écosystème Docker</li>
                                           </ol>
                                 </section>
 
 <!-- ########################################################################################## -->
-<!-- ########################################################################################## -->
-<section id="constat" >
-					<section data-markdown id="Constat1">
-## Le constat
-* Les géants du web ont changé leurs méthodes de développement et de déploiement depuis plusieurs années pour être plus efficace.
-* Les petites entreprises innovantes utilisent maintenant les mêmes méthodes.
-* Docker, Devops, Orchestration, Microservices,  ...
-* Et nous ?
-					</section>
+<section>
 
-       <!-- ########################################################################################## -->
+	<section id="devops-incomprehension">
+	<h3>ça veut dire quoi ? </h3>				
+	<img src="images/opspb.jpg"  />
+	</section>
+
+
+	<section id="devops-incomprehension">
+	<h3>2 cultures qui ne se comprènenet pas</h3>				
+	<img src="images/devops.png"  />
+	</section>
+
+
+
+	<section id="devops-agile">
+	<h3>Continuité de l'agile </h3>				
+	<img src="images/devops.jpg"  />
+	</section>
+
+
+	<section id="devops-rencontre">
+	<h3>Avec une dimension qualité</h3>				
+	<img src="images/Devops.svg.png" style="background:none; border:none; box-shadow:none; width:70%;"   />
+	</section>
+
+
+	<section data-markdown id="devopsDef">
+	## Les avantages
+	* Continuité de l’agilité
+	* Aligner les objectifs et rapprocher 2 cultures en une seule 
+	* Rapprochement des équipes
+	* Augmenter la qualité
+	* Diminuer les couts
+	* Accélérer les changements
+	</section>
+
+	<section data-markdown id="Constat1">
+	## Les acteurs du changement
+	* Les géants du web avaient besoin de faire des mises à jour de plus en plus régulières tout en gardant une stabilité
+	* Les startups avaient besoin de scalabilité souple
+	</section>
+
+      
 					<section data-markdown id="Concept">
 						## Changement de vitesse
-|Datacenter                 | | Virtualisation            | | Docker 		     |
+|Développement en cascade                 | | Méthodes agiles            | | DevOps 		     |
 |---------------------------|-|---------------------------|-|--------------------------------|
+|Datacenter                 | | Virtualisation            | | Conteneurisation  		     |
 | ![](images/datacenter.png)| | ![](images/virtu.png)     | | ![](images/docker-concept.png) |
-|Déploiement dans le mois   | &#8680; |Déploiement dans la minute| &#8680; |Déploiement dans la seconde |
-|Pendant des années         | |Pendant des mois           | |Pendant quelques heures/minutes     |
-|Développement en cascade   | | Agile                     | | DevOps                         |
+|cycles de releases en mois    | | cycles de releases en semaines                     | | cycles de releases en jours                         |
+|Déploiement dans le mois   | &#8680; |Déploiement dans la semaine| &#8680; |Déploiement dans la minute |
 </section>
 
-<section id="dev-cycle">
+	<section id="dev-cycle" data-background="images/bg.png">
 
-		<h3> Plus rapide et de meilleur qualité </h3>
-        <img src="images/dev-cycle.png" style="background:none; border:none; box-shadow:none; width:180%;" />
+			<h3> Répartition des temps</h3>
+	        <img src="images/dev-cycle.png" style="background:none; border:none; box-shadow:none; width:180%;" />
+
+	</section>
+
 
 </section>
 
-<section data-markdown id="solution">
-### DevOps est une partie d'un changement plus large
-![](images/qui-quoi-comment.svg)
-</section>
+ <!-- ########################################################################################## -->
+
+<section>
+	<section  id="principes-titre">
+		<h3> Les grands principes DevOps</h3>
+		<img src="images/devopsonemore.jpg"  />
+	</section>
+
+	<section data-markdown  id="principes-ic">
+	## Intégration continue
+* Compiler, tester et livrer régulièrement.
+* Le code source est géré dans un repository ( GIT, SVN, Mercurial)
+* Compiler et construire l’application de façon automatique 
+* Ecrire des tests unitaires et les exécuter régulièrement
+* Construire et packager l’application à intervalle régulier ou déclancher la construction après chaque commit.
+	</section>
+
+	<section data-markdown  id="principes-lc">
+	## Livraison continue
+* Automatiser la livraison de l’application sur différents environnement tout au long de son cycle de vie :
+Dev, Integration, Recette, Production
+* Environnements le plus proche possible de celui de production
+* Le déploiement doit se faire sans modification de code.
+* Déploiement 100% automatisé
+
+	</section>
+
+	<section data-markdown  id="principes-dc">
+	## Déploiement continue
+* Vient après la livraison continue, mais est déployé jusqu’en production.
+* Nécessite une automatisation complète (possibilité de validation manuelle)
+* Peut être fait sans interruption de service
+* Certains grands sites déploient des dizaines de release par jour.
+	</section>
+
+	<section id="principes-ac">
+		<h3>Automatisation continue</h3>
+		<img src="images/automatall.jpg" style="background:none; border:none; box-shadow:none; width:70%;" />
+	</section>
+
+	<section data-markdown  id="principes-a">
+	## Mais encore
+	* Multiplier les sondes, et indices pour le monitoring
+	* Monitoring et logs partagés
+	* Viser la performance
+	* Autoscaling
+	* Sécurité
+	</section>
 
 </section>
 <!-- ########################################################################################## -->
-<!-- ########################################################################################## -->
- 
-         <section>
+<section>
+	<section id="outils">
+		<h3>Les bons outils</h3>
+		<img src="images/tools.gif" style="background:none; border:none; box-shadow:none;" />
+	</section>
+
+	<section data-markdown  id="outils1">
+	## Protocol versioning
+	* **GIT**
+	* SVN
+	* Mercurial
+	* Liquibase (BDD)
+	</section>
+
+	<section data-markdown  id="outils2">
+	## git clients
+	* **no need**
+	* Sourcetree
+	* Tortoisegit
+	* Gitkraken
+	</section>
+
+
+	<section id="outils22" >
+		<h3>git flow</h3>
+		<img src="images/gitflow.png" style="background:none; border:none; box-shadow:none;width:50%;" />
+	</section>
+
+	<section data-markdown  id="outils3">
+	## Repository hosting service
+	* **Gitlab**
+	* Github
+	* Bitbucket
+	* Usvn
+	</section>
+
+
+	<section data-markdown  id="outils4">
+	## bug tracking
+	* **Gitlab**
+	* Redmine
+	* Mantis
+	* Trac
+	* Jira
+	* Trello
+	* Wrike
+	* Taiga.io
+	</section>
+
+
+	<section data-markdown  id="outils5">
+	## application-level package manager
+|   |   |
+| -------- | -------- |
+| PHP   | Composer   |
+| Npm   | Nodejs  |
+| Java   | Ant   |
+| Ruby   | Rake   |
+| JS   | Webpack,gulp,grunt   |
+|    |    |
+
+
+	</section>
+
+	<section data-markdown  id="outils6">
+	## Outil d'Intégration continue
+	* **Gitlab**
+	* Jenkins
+	* Travis
+	</section>
+
+	<section  id="outils7">
+		<h3>Gitlab</h3>
+		<img src="images/gitlabci.png" style="background:none; border:none; box-shadow:none; width:70%;" />
+	</section>
+
+
+	<section data-markdown  id="outils8">
+	## Orchestration
+	* **Capistrano**
+	* Rundeck
+	</section>
+
+	<section data-markdown  id="outils9">
+	## Infrastructure virtuelle
+	* Vagrant
+	* Virtualbox
+	* Packer
+	</section>
+
+	<section data-markdown  id="outils10">
+	## Configuration
+	* Chef
+	* Puppet
+	</section>
+
+	<section data-markdown  id="outils11">
+	## Monitoring
+	* ElasticSearch + Kibana
+	* Collectd, Stats, JMXTrans, Metrics, Esper, Ganglia, Graphite, Cube
+	* Graylog2, Flume, Logstash
+	</section>
+
+
+
+
+</section>
+<!-- ########################################################################################## --> 
+         <section >
 					<section id="Docker" data-background="images/bg.png">
-						<h2>Petit rappel sur <img src="images/vector_h-dark-trans.svg" alt="Docker" style="background:none; border:none; box-shadow:none; width:70%;" /></h2>
+						<h2>Votre outil préféré :  <img src="images/vector_h-dark-trans.svg" alt="Docker" style="background:none; border:none; box-shadow:none; width:70%;" /></h2>
 					</section>
-         		<section id="hypervsdocker">
+         		<section id="hypervsdocker" data-background="images/bg.png">
                         <h3>Hyperviseur vs Docker</h3>
                         <img src="images/HypervizorVSdocker.png" style="background:none; border:none; box-shadow:none; width:180%;" />
         		 </section>
-		 		<section  data-markdown id="dockertools">
-### Les outils Docker libres
-* ####Docker Moteur/Client
- *Le moteur et le client pour utiliser docker en cli.*
+		 
 
-* ####Docker Machine
- *Permet de créer automatiquement un environnement virtuel pour lancer Docker.*
-
-* ####Docker Compose
- *Permet de lancer des applications multi-containers.*
-
-* ####Docker Swarm
- *Permet de gérer les containers Docker dans un cluster.*
-        		 </section>
-		 		<section  data-markdown id="dockertools2">
-### Les outils Docker libres
- 
-* ####Docker Registry
- *Application de gestion des images locales.*
-
-* ####Notary 
-*Outils permettant la signature des images par le fournisseur et la vérification de l'intégrité par le client.*
-
-* ####libnetwork
-*Outil d'abstraction réseau permettant la communication et l'isolation entre les containers et ceci même sur des nœuds différents.*
-        		 </section>
-
-
-		 		<section  id="dockers-stage">
+		 		<section  id="dockers-stage" data-background="images/bg.png">
 					<h3>Docker Moteur/Client</h3>
  <img src="images/docker-stages.png" alt="etcd" style="background:none; border:none; box-shadow:none; " />
         		 </section>
 		 		<section  data-markdown id="pourquoi-docker">
 ### Pourquoi utilise-t-on Docker ?
-* Distribution des applications facilitée.
+* Scaling facilité 
+* Dépendances serveur scriptées et versionnées
 * Comportement identique des applications en Dev/Qualif/Prod.
-* Déploiement, lancement et arrêt rapide.
-* Linux et Windows (en preview dans Windows Server 2016)
+* Linux et Windows 
 * Permet de reconstruire un container à partir d'un simple fichier Dockerfiles.
 * Gestion des containers avec peu d'outils, identique sur toutes les plateformes.
 * Des API disponibles pour piloter l'ensemble depuis d'autres applications.
@@ -171,230 +334,13 @@
 
          		</section>
 <!-- ########################################################################################## -->
+
 <!-- ########################################################################################## -->
-         		<section>
 
-         <section id="twelvefactor" data-background="images/bg.png">
-             <h3>The Twelve Factors</h3>
-             <p>La popularité de Docker vient en partie de sa compatibilité avec les règles 12 Factors.</p>
-             <center>
-             <table>
-                 <tr>
-                    <td>
-             <ol>
-                 <li><h5>Codebase</h5></li>
-                 <li><h5>Dependencies</h5></li>
-                 <li><h5>Config</h5></li>
-                 <li><h5>Backing Services</h5></li>
-                 <li><h5>Build, release, run</h5></li>
-                 <li><h5>Processes</h5></li>
-             </ol>
-                    </td>
-                    <td>
-             <ol start="7">
-                 <li><h5>Port binding</h5></li>
-                 <li><h5>Concurrency</h5></li>
-                 <li><h5>Disposability</h5></li>
-                 <li><h5>Dev/prod parity</h5></li>
-                 <li><h5>Logs</h5></li>
-                 <li><h5>Admin process</h5></li>
-             </ol>
-                    </td>
-                 </tr>
-            </table>
-        </center>
-        <p><href a="http://12factor.net">http://12factor.net</href> </p>
-          </section>
-                                            <section id="util-12factor-codebase">
-                                            <h3>Codebase</h3>
-                                                <ul>
-                                                        <li >Tout code doit être géré par un logiciel de suivi de version (git, mercurial, ...).</li>
-                                                        <li >Une application = code source </li>
-                	                        </ul>
-                                        </section>
-                                        <section id="util-12factor-dep">
-			                    <h3>Dependencies</h3>
-                                                <ul>
-                                                        <li >Toutes les dépendances doivent être clairement précisées.</li>
-                                                        <li >Le système cible n'est pas censé contenir de programme pré-installé. </li>
-                                                        <li >Pas de dépendances implicites.</li>
-                	                        </ul>
-                                        </section>
-                                        <section id="util-12factor-config">
-                                            <h3>Config</h3>
-                                                <ul>
-                                                        <li >Est considéré comme configuration, tout ce qui diffère d'un environnement à l'autre (dev, qualif, prod, autre site). </li>
-                                                        <li >Tout élément de configuration doit être passé par des variables d'environnement.</li>
-                                                        <li >Il ne doit y avoir absolument aucune référence à la configuration dans le code.</li>
-                	                        </ul>
-                                        </section>
-                                        <section id="util-12factor-backing">
-						<h3>Backing Services</h3>
-                                                <ul>
-                                                        <li >Un <i>backing service </i> est une ressource externe au conteneur (base mysql, smtp, activemq, memcache,&nbsp;...).</li>
-                                                        <li >L'accès à ces ressources doit être passé en paramètre.</li>
-							<li >Pas de distinction entre les services locaux et distants.</li>
-                	                        </ul>
-                                        </section>
-                                        <section id="util-12factor-build">
-                                            <h3>Build, release, run</h3>
-                                                <ul>
-                                                        <li >On recrée l'application et l'environnement avant tout déploiement d'une nouvelle version.</li>
-                                                        <li >Aucune modification n'est apportée sur l'application déployée. </li>
-                                                        <li >Chaque version déployée a un numéro de version unique (timestamp, numero de commit, ...).</li>
-                	                        </ul>
-                                        </section>
-                                        <section id="util-12factor-process">
-                                            <h3>Processes</h3>
-                                                <ul>
-                                                        <li >L'application est exécutée dans l'environnement d'exécution en tant qu'un ou plusieurs processus.</li>
-							<li >Toutes les données doivent être stockées dans une ressource externe (base de données).</li>
-                                                        <li >Les variables de sessions utilisateurs ne doivent jamais être stockées localement. </li>
-                	                        </ul>
-                                        </section>
-                                        <section id="util-12factor-port">
-                                            <h3>Port binding</h3>
-                                                <ul>
-                                                        <li >L'application fournit un service qui écoute sur un port.</li>
-                	                        </ul>
-                                        </section>
-                                        <section id="util-12factor-concurrency">
-                                            <h3>Concurrency</h3>
-                                                <ul>
-							<li >Chaque application peut être mise à l'echelle. Les conteneurs peuvent être lancés x fois pour répartir la charge.</li>
-                                                        <li >Le programme dans le conteneur ne doit pas être lancé en tâche de fond.</li>
-                                                        <li >L'arrêt du programme entraîne l'arrêt du conteneur.</li>
-                	                        </ul>
-                                        </section>
-                                        <section id="util-12factor-dispo">
-                                            <h3>Disposability</h3>
-                                                <ul>
-                                                        <li >Le conteneur doit être jetable.</li>
-                                                        <li >Il doit donc pouvoir être lancé très rapidement. </li>
-                                                        <li >Un arrêt intempestif ne doit pas compromettre les données.</li>
-                	                        </ul>
-                                        </section>
-                                        <section id="util-12factor-devprod">
-                                            <h3>Dev/prod parity</h3>
-                                                <ul>
-                                                        <li >Le développeur doit pouvoir déployer rapidement le code qu'il vient de finir d'écrire.</li>
-                                                        <li >Le développeur doit être plus proche du déploiement (DevOps).</li>
-                                                        <li >Maintenir le développement et la production aussi semblables que possible en utilisant les mêmes outils.</li>
-                                                        <li >Éviter de prendre des backends différents en prod et en dev (ex: base de données, ...) pour limiter les surprises en production.</li>
-                	                        </ul>
-                                        </section>
-                                        <section id="util-12factor-logs">
-                                            <h3>Logs</h3>
-                                                <ul>
-                                                        <li >Les applications doivent externaliser leurs journaux pour la visualisation et l'archivage à long terme (ELK, Spunk, rsyslog ...).</li>
-                                                        <li >Les journaux peuvent s'afficher dans la sortie standard de l'application, mais pas dans un fichier du conteneur.</li>
-                	                        </ul>
-                                        </section>
-                                        <section id="util-12factor-admin">
-                                            <h3>Admin process</h3>
-                                                <ul>
-                                                        <li >Les commandes d'administration doivent s'exécuter dans un environnement identique aux autres processus d'exploitation.</li>
-							<li >Même conteneur, mêmes variables d'environnement, mais en mode interactif.</li>
-                	                        </ul>
-                                        </section>
-                                        <section id="mircoservice">
-                                            <h2>12-factors c'est bien mais...</h2>
-                                            <h3>... Comment les mettre en œuvre de façon efficace.</h3>
-                                        </section>
- 
-</section>
-<!-- ########################################################################################## -->
-<!-- ########################################################################################## -->
-<section >
-
-					<section data-markdown id="Microservice" data-background="images/bg.png">
-## Microservices
-					</section>
-			        <section  data-markdown>
-### Juste un Buzz ?
-* Micro-Web-Services en 2005
-* Définition Microservices en 2011
-* Microservices c'est comme SOA mais seulement les bonnes parties.
-![](images/Microservices_trends.png)
-					</section>
-			        <section  data-markdown>
-### Intérêt relatif par rapport à d'autres outils.						
-![](images/Microservices_trends_Docker.png)
-					</section>
-			        <section  data-markdown>
-### Les applications monolithiques
-![](images/Monolithique.svg)
-                    </section>
-			        <section  data-markdown>
-### Les applications monolithiques
-* Applications N-tiers.
-* IHM, core, accès aux BDD.
-* Chaque modification nécessite de redéployer la totalité de l'application.
-* Chaque modification nécessite de retester l'ensemble de l'application.
-* Difficile de garder au fil du temps une bonne structure modulaire.
-* Mise à l'echelle couteuse.
-* Manque de diversité technologique.
-* Pas facile de changer un composant.
-                    </section>
-			        <section  data-markdown>
-### Les Applis Microservices
-![](images/Microservices.svg)
-                    </section>
-			        <section  data-markdown>
-### Les Microservices
-#### Élastique
-Un Microservice doit pouvoir être déployé un nombre de fois qui varie en fonction de la demande, et ce, indépendamment des autres services dans la même application.
-#### Résilent
-Un Microservice doit échouer sans affecter d'autres services dans la même application.
-                    </section>
-			        <section  data-markdown>
-### Les Microservices
-#### API
-Les Microservices doivent avoir une API stable, cohérente et bien documentée. [https://openapis.org/](https://openapis.org/)
-#### Minimal mais complet
-Un Microservice doit être le plus petit possible mais pas plus petit.
-Il doit offrir une fonction complète avec des dépendances minimales avec les autres services.
-                    </section>
-			        <section  data-markdown>
-### Avantages 
-* Facilite le travail en équipe.
-* Augmente la qualité globale des applications.
-* Permet d'utiliser le meilleur langage de programmation en fonction de la problématique.
-* Permet d'automatiser les tests, la qualification et le déploiement en production.
-* Chaque Microservice peut être mis à l'échelle indépendament et peut être optimisé sans affecter le reste de l'application.
-* Augmentation de la robustesse de l'architecture, de la tolérance aux pannes.
-
-                    </section>
-			        <section  data-markdown>
-### Inconvénients 
-* Nécessite un bon niveau d'expertise DevOps. 
-* Gestion décentralisée des données.
-* Application polyglotte.
-* Augmentation du trafic réseau.
-* Coût initial plus élevé.
-* Sécurité des communications entre les Applis.
-
-*Tous ces points peuvent être résolus par l'utilisation d'outils adéquats et d'un peu d'huile de coude.*
-                    </section>
-
-			        <section  data-markdown>
-### La motivation qui pousse à utiliser les Microservices
-* Frustration de ne pas obtenir le résultat souhaité avec une architecture monolithique.
-* Arrivée sur le marché d'outils permettant le déploiement des applications Microservices avec plus de facilité.
-* Large adoption des solutions d'infrastructure en tant que service (IaaS).
-* Le passage des grosses sociétés du Web vers des architectures complètement Microservices.
-
-*Dans un avenir plus ou moins proche les applications monolithiques ne serviront qu'au prototypage.*
-					</section>
-				
-				</section>
-	   
-	 
-<!-- ########################################################################################## -->
 
          <section>
-					<section id="Orchest" data-background="images/bg.png">
-						<h2>Solutions d'Orchestration OpenSource</h2>
+					<section id="Orchest">
+						<h2>L'écosystème Docker</h2>
 					</section>
 					<section data-markdown>
 ### Docker Machine/Compose/Swarm 
@@ -448,10 +394,10 @@ Il doit offrir une fonction complète avec des dépendances minimales avec les a
 * Outil Redhat adapter à Docker
 * Fonctionnalités disponibles par rapport à la version RedHat ?
 					</section>
+
 					<section data-markdown>
 ### Rancher 
-[http://rancher.com](http://rancher.com)
-
+ [http://rancher.com](http://rancher.com)
 #### Avantages
 * Simplicité d'utilisation et de mise en œuvre.
 * Utilisation des API Docker, des scripts Docker-compose.
@@ -461,26 +407,23 @@ Il doit offrir une fonction complète avec des dépendances minimales avec les a
 
 #### Inconvénients
 * Solution un peu jeune.
-* Pas de retour sur un déploiement à grande echelle.
-					</section>
-					<section data-markdown>
-### Kontena
-[http://www.kontena.io/](http://www.kontena.io/)
-#### Avantages
-* Proche de Rancher mais sans interface Graphique.
-* Utilisation des API Docker, des scripts Docker-compose.
-* Gestion registre Privé.
-* Support clouds publics (AWS, Azure, DigitalOcean) + BareMetal.
-* Gestion des containers stateful pour les BDD.
-
-#### Inconvénients
-* Outils + Dev que Ops.
-* Solution un peu jeune, pas prête pour la production.
 					</section>
          </section>
 
  <!-- ########################################################################################## -->
-         <section data-background="images/bg.png">
+         <section >
+                                        <section data-markdown id="sources">
+## Sources
+* Le blog [de Gautier C](http://gauthierc.github.io/) sur Docker
+* [JDN](http://www.journaldunet.com/web-tech/developpeur/1130222-le-devops-une-demarche-courante-dans-25-des-grands-groupes/) article sur le marché DevOPS
+* [Yann Viagra](blog.ippon.fr) article sur la révolution DevOps dans programmez mag-nov 2013
+* Et bien sur tous les sites officiels des outils présentés
+                                     </section>
+         </section>
+ <!-- ########################################################################################## -->
+
+ <!-- ########################################################################################## -->
+         <section >
                                         <section data-markdown id="question">
 # Questions ?
 
@@ -504,6 +447,7 @@ Il doit offrir une fonction complète avec des dépendances minimales avec les a
 				progress: true,
 				history: true,
 				center: true,
+
 
 				transition: 'convex', // none/fade/slide/convex/concave/zoom
 

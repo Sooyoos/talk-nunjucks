@@ -1,2 +1,1 @@
-# SlideDockerMicroservices
-Présentation "Architecture micro-services avec Docker"
+# Présentation sur les méthodes DevOps
