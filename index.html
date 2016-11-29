@@ -1,468 +1,220 @@
 <!doctype html>
 <html lang="fr">
-
-	<head>
-		<meta charset="utf-8">
-
-		<title>DevOps méthodes</title>
-
-		<meta name="description" content="DevOpsp">
-		<meta name="author" content="Sooyoos">
-
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-
-		<link rel="stylesheet" href="reveal.js/css/reveal.css">
-		<link rel="stylesheet" href="reveal.js/css/theme/league.css" id="theme">
-		<link rel="shortcut icon" href="./images/favicon.png">
-		<!-- Code syntax highlighting -->
-		<link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
-		<style>
-			.reveal h3 {
-				text-transform: none;
-			}
-			#shell {
-				color: #255a7c;
-				font-family: Monospace;
-				font-size: 0.8em;
-			}
-			.reveal thead {
-				font-size: 0.85em;
-			}
-			.reveal td {
-				font-size: 0.8em;
-			}
-			.reveal section img {
-				background:none; border:none; box-shadow:none;
-			}
-		</style>
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-		<!--[if lt IE 9]>
-		<script src="reveal.js/lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
-
-	<body>
-
-		<div class="reveal">
-
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
-				<section id="debut" >
-                    <img src="images/docker.png" style="background:none; border:none; box-shadow:none;width:60%;" />
-					<!--<h1>Core<span style="color:#f35b69">O</span><span style="color:#6d9eeb">S</span></h1>-->
-					<h3>DevOps </h3>
-					<p><small><small>
-by guillaume sondag - sooyoos</small></small>
-					</p>
-
-					<p><small><small>
-<a href="www.sooyoos.com">site</a> <a href="https://www.facebook.com/sooyoos">facebook</a> <a href="https://twitter.com/_sooyoos_">twitter</a></small></small>
-					</p>
-				</section>
-<!-- ########################################################################################## -->
-                          
-                                <section id="abstract" >
-                                          <h2>On va parler de...</h2>
-
-                                          <ol>
-					      <li>DevOps ça veut dire quoi ?</li>
-					      <li>Les grands principes</li>
-					      <li>Les outils</li>
-					      <li>Docker</li>
-					      <li>L'écosystème Docker</li>
-                                          </ol>
-                                </section>
-
-<!-- ########################################################################################## -->
-<section>
-
-	<section id="devops-incomprehension">
-	<h3>ça veut dire quoi ? </h3>				
-	<img src="images/opspb.jpg"  />
-	</section>
-
-
-	<section id="devops-incomprehension">
-	<h3>2 cultures qui ne se comprènenet pas</h3>				
-	<img src="images/devops.png"  />
-	</section>
-
-
-
-	<section id="devops-agile">
-	<h3>Continuité de l'agile </h3>				
-	<img src="images/devops.jpg"  />
-	</section>
-
-
-	<section id="devops-rencontre">
-	<h3>Avec une dimension qualité</h3>				
-	<img src="images/Devops.svg.png" style="background:none; border:none; box-shadow:none; width:70%;"   />
-	</section>
-
-
-	<section data-markdown id="devopsDef">
-	## Les avantages
-	* Continuité de l’agilité
-	* Aligner les objectifs et rapprocher 2 cultures en une seule 
-	* Rapprochement des équipes
-	* Augmenter la qualité
-	* Diminuer les couts
-	* Accélérer les changements
-	</section>
-
-	<section data-markdown id="Constat1">
-	## Les acteurs du changement
-	* Les géants du web avaient besoin de faire des mises à jour de plus en plus régulières tout en gardant une stabilité
-	* Les startups avaient besoin de scalabilité souple
-	</section>
-
-      
-					<section data-markdown id="Concept">
-						## Changement de vitesse
-|Développement en cascade                 | | Méthodes agiles            | | DevOps 		     |
-|---------------------------|-|---------------------------|-|--------------------------------|
-|Datacenter                 | | Virtualisation            | | Conteneurisation  		     |
-| ![](images/datacenter.png)| | ![](images/virtu.png)     | | ![](images/docker-concept.png) |
-|cycles de releases en mois    | | cycles de releases en semaines                     | | cycles de releases en jours                         |
-|Déploiement dans le mois   | &#8680; |Déploiement dans la semaine| &#8680; |Déploiement dans la minute |
-</section>
-
-	<section id="dev-cycle" data-background="images/bg.png">
-
-			<h3> Répartition des temps</h3>
-	        <img src="images/dev-cycle.png" style="background:none; border:none; box-shadow:none; width:180%;" />
-
-	</section>
-
-
-</section>
-
- <!-- ########################################################################################## -->
-
-<section>
-	<section  id="principes-titre">
-		<h3> Les grands principes DevOps</h3>
-		<img src="images/devopsonemore.jpg"  />
-	</section>
-
-	<section data-markdown  id="principes-ic">
-	## Intégration continue
-* Compiler, tester et livrer régulièrement.
-* Le code source est géré dans un repository ( GIT, SVN, Mercurial)
-* Compiler et construire l’application de façon automatique 
-* Ecrire des tests unitaires et les exécuter régulièrement
-* Construire et packager l’application à intervalle régulier ou déclancher la construction après chaque commit.
-	</section>
-
-	<section data-markdown  id="principes-lc">
-	## Livraison continue
-* Automatiser la livraison de l’application sur différents environnement tout au long de son cycle de vie :
-Dev, Integration, Recette, Production
-* Environnements le plus proche possible de celui de production
-* Le déploiement doit se faire sans modification de code.
-* Déploiement 100% automatisé
-
-	</section>
-
-	<section data-markdown  id="principes-dc">
-	## Déploiement continue
-* Vient après la livraison continue, mais est déployé jusqu’en production.
-* Nécessite une automatisation complète (possibilité de validation manuelle)
-* Peut être fait sans interruption de service
-* Certains grands sites déploient des dizaines de release par jour.
-	</section>
-
-	<section id="principes-ac">
-		<h3>Automatisation continue</h3>
-		<img src="images/automatall.jpg" style="background:none; border:none; box-shadow:none; width:70%;" />
-	</section>
-
-	<section data-markdown  id="principes-a">
-	## Mais encore
-	* Multiplier les sondes, et indices pour le monitoring
-	* Monitoring et logs partagés
-	* Viser la performance
-	* Autoscaling
-	* Sécurité
-	</section>
-
-</section>
-<!-- ########################################################################################## -->
-<section>
-	<section id="outils">
-		<h3>Les bons outils</h3>
-		<img src="images/tools.gif" style="background:none; border:none; box-shadow:none;" />
-	</section>
-
-	<section data-markdown  id="outils1">
-	## Protocol versioning
-	* **GIT**
-	* SVN
-	* Mercurial
-	* Liquibase (BDD)
-	</section>
-
-	<section data-markdown  id="outils2">
-	## git clients
-	* **no need**
-	* Sourcetree
-	* Tortoisegit
-	* Gitkraken
-	</section>
-
-
-	<section id="outils22" >
-		<h3>git flow</h3>
-		<img src="images/gitflow.png" style="background:none; border:none; box-shadow:none;width:50%;" />
-	</section>
-
-	<section data-markdown  id="outils3">
-	## Repository hosting service
-	* **Gitlab**
-	* Github
-	* Bitbucket
-	* Usvn
-	</section>
-
-
-	<section data-markdown  id="outils4">
-	## bug tracking
-	* **Gitlab**
-	* Redmine
-	* Mantis
-	* Trac
-	* Jira
-	* Trello
-	* Wrike
-	* Taiga.io
-	</section>
-
-
-	<section data-markdown  id="outils5">
-	## application-level package manager
-|   |   |
-| -------- | -------- |
-| PHP   | Composer   |
-| Npm   | Nodejs  |
-| Java   | Ant   |
-| Ruby   | Rake   |
-| JS   | Webpack,gulp,grunt   |
-|    |    |
-
-
-	</section>
-
-	<section data-markdown  id="outils6">
-	## Outil d'Intégration continue
-	* **Gitlab**
-	* Jenkins
-	* Travis
-	</section>
-
-	<section  id="outils7">
-		<h3>Gitlab</h3>
-		<img src="images/gitlabci.png" style="background:none; border:none; box-shadow:none; width:70%;" />
-	</section>
-
-
-	<section data-markdown  id="outils8">
-	## Orchestration
-	* **Capistrano**
-	* Rundeck
-	</section>
-
-	<section data-markdown  id="outils9">
-	## Infrastructure virtuelle
-	* Vagrant
-	* Virtualbox
-	* Packer
-	</section>
-
-	<section data-markdown  id="outils10">
-	## Configuration
-	* Chef
-	* Puppet
-	</section>
-
-	<section data-markdown  id="outils11">
-	## Monitoring
-	* ElasticSearch + Kibana
-	* Collectd, Stats, JMXTrans, Metrics, Esper, Ganglia, Graphite, Cube
-	* Graylog2, Flume, Logstash
-	</section>
-
-
-
-
-</section>
-<!-- ########################################################################################## --> 
-         <section >
-					<section id="Docker" data-background="images/bg.png">
-						<h2>Votre outil préféré :  <img src="images/vector_h-dark-trans.svg" alt="Docker" style="background:none; border:none; box-shadow:none; width:70%;" /></h2>
-					</section>
-         		<section id="hypervsdocker" data-background="images/bg.png">
-                        <h3>Hyperviseur vs Docker</h3>
-                        <img src="images/HypervizorVSdocker.png" style="background:none; border:none; box-shadow:none; width:180%;" />
-        		 </section>
-		 
-
-		 		<section  id="dockers-stage" data-background="images/bg.png">
-					<h3>Docker Moteur/Client</h3>
- <img src="images/docker-stages.png" alt="etcd" style="background:none; border:none; box-shadow:none; " />
-        		 </section>
-		 		<section  data-markdown id="pourquoi-docker">
-### Pourquoi utilise-t-on Docker ?
-* Scaling facilité 
-* Dépendances serveur scriptées et versionnées
-* Comportement identique des applications en Dev/Qualif/Prod.
-* Linux et Windows 
-* Permet de reconstruire un container à partir d'un simple fichier Dockerfiles.
-* Gestion des containers avec peu d'outils, identique sur toutes les plateformes.
-* Des API disponibles pour piloter l'ensemble depuis d'autres applications.
-         		</section>
-
-         		</section>
-<!-- ########################################################################################## -->
-
-<!-- ########################################################################################## -->
-
-
-         <section>
-					<section id="Orchest">
-						<h2>L'écosystème Docker</h2>
-					</section>
-					<section data-markdown>
-### Docker Machine/Compose/Swarm 
-[http://www.docker.com](http://www.docker.com)
-
-#### Avantages
-* Outils certifiés compatible Docker ;-)
-
-#### Inconvénients
-* Pas d'interface graphique libre (*Docker Universal Control Plane* n'est pas libre.)
-* Difficiles à utiliser pour un déploiement à grande échelle sans développer ses propres outils d'administration.
-					</section>
-					<section data-markdown>
-### Kubernetes
-[http://k8s.io](http://k8s.io)
-
-#### Avantages
-* Utilisable en production (v1.1)
-* Supporte plusieurs types de Containers (Docker, Rkt, Hyper)
-* Permet de gérer des milliers de nœuds. 
-* Produit plus ancien que Docker
-
-#### Inconvénients
-* Utilise ses propres outils réseau.
-* API différente de Docker
-					</section>
-					<section data-markdown>
-### Apache Mesos 
-[http://mesos.apache.org/](http://mesos.apache.org/)
-
-#### Avantages
-* Permet de gérer plus de 10 000 nœuds. 
-* Produits plus ancien que Docker.
-* Vient du monde cluster
-
-#### Inconvénients
-* Complexité de mise en œuvre (nombreuses briques)
-* Marathon couche d'abstraction pour faire tourner Docker
-* Adapté au monstre du Web
-					</section>
-					<section data-markdown>
-### Openshift Origin v3 
-[http://www.openshift.org](http://www.openshift.org)
-
-#### Avantages
-* Très bon produit PaaS
-* Basé sur Kubernetes
-* Intégration à Eclipse
-
-#### Inconvénients
-* Outil Redhat adapter à Docker
-* Fonctionnalités disponibles par rapport à la version RedHat ?
-					</section>
-
-					<section data-markdown>
-### Rancher 
- [http://rancher.com](http://rancher.com)
-#### Avantages
-* Simplicité d'utilisation et de mise en œuvre.
-* Utilisation des API Docker, des scripts Docker-compose.
-* Permet de déployer des containers en cloud privé/public + BareMetal.
-* Gestion centralisée multi-environnements.
-* Connexion ldap, local, github.
-
-#### Inconvénients
-* Solution un peu jeune.
-					</section>
-         </section>
-
- <!-- ########################################################################################## -->
-         <section >
-                                        <section data-markdown id="sources">
-## Sources
-* Le blog [de Gautier C](http://gauthierc.github.io/) sur Docker
-* [JDN](http://www.journaldunet.com/web-tech/developpeur/1130222-le-devops-une-demarche-courante-dans-25-des-grands-groupes/) article sur le marché DevOPS
-* [Yann Viagra](blog.ippon.fr) article sur la révolution DevOps dans programmez mag-nov 2013
-* Et bien sur tous les sites officiels des outils présentés
-                                     </section>
-         </section>
- <!-- ########################################################################################## -->
-
- <!-- ########################################################################################## -->
-         <section >
-                                        <section data-markdown id="question">
-# Questions ?
-
-### Merci
-                                     </section>
-         </section>
- <!-- ########################################################################################## -->
+<head>
+	<meta charset="utf-8">
+
+	<title>InteTools</title>
+
+	<meta name="description" content="InteTools">
+	<meta name="author" content="Sooyoos">
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="reveal.js/css/reveal.css">
+	<link rel="stylesheet" href="reveal.js/css/theme/league.css" id="theme">
+	<link rel="shortcut icon" href="./images/favicon.png">
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+	<style>
+		@font-face {
+		    font-family: 'dincond-bold';
+		    src: url('./fonts/dincond-bold-webfont.eot');
+		    src: url('./fonts/dincond-bold-webfont.eot?#iefix') format('embedded-opentype'),
+		         url('./fonts/dincond-bold-webfont.woff2') format('woff2'),
+		         url('./fonts/dincond-bold-webfont.woff') format('woff'),
+		         url('./fonts/dincond-bold-webfont.ttf') format('truetype'),
+		         url('./fonts/dincond-bold-webfont.svg#dincond-boldregular') format('svg');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		@font-face {
+			font-family: 'ChaparralPro';
+			src: url('./fonts/ChaparralPro-Regular.eot?#iefix') format('embedded-opentype'),
+				 url('./fonts/ChaparralPro-Regular.otf')  format('opentype'),
+				 url('./fonts/ChaparralPro-Regular.woff') format('woff'),
+				 url('./fonts/ChaparralPro-Regular.ttf')  format('truetype'),
+				 url('./fonts/ChaparralPro-Regular.svg#ChaparralPro-Regular') format('svg');
+			font-weight: normal;
+			font-style: normal;
+		}
+		body .reveal {font-family: 'ChaparralPro', sans-serif;}
+		.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {font-family: 'dincond-bold', sans-serif;}
+		img {background:none !important; border:none !important; box-shadow:none !important;}
+		hr {width: 150px; height: 3px; background: #ff5a5f; border: none;}
+		.reveal h3 {
+			text-transform: none;
+		}
+		#shell {
+			color: #255a7c;
+			font-family: Monospace;
+			font-size: 0.8em;
+		}
+		.reveal thead {
+			font-size: 0.85em;
+		}
+		.reveal td {
+			font-size: 0.8em;
+		}
+		.reveal section img {
+			background:none; border:none; box-shadow:none;
+		}
+	</style>
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+	<!--[if lt IE 9]>
+	<script src="reveal.js/lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+<div class="reveal">
+	<!-- Any section element inside of this container is displayed as a slide -->
+	<div class="slides">
+		<section id="debut">
+            <img src="images/tools-icon.png" style="width:300px;" />
+			<h3>Outils pour l'intégration</h3>
+			<hr>
+			<p style="margin: 0; color: #ff5a5f;"><small>by</small></p>
+			<img src="images/starter/sooyoos.svg" style="width:200px; margin-top: 0;" />
+
+
+			<div>
+				<a href="www.sooyoos.com"><img src="images/starter/grid-world.svg" style="width:30px;"/></a> 
+				<a href="https://www.facebook.com/sooyoos" style="margin: 0 15px;"><img src="images/starter/facebook.svg" style="width:30px;"/></a> 
+				<a href="https://twitter.com/_sooyoos_"><img src="images/starter/twitter.svg" style="width:30px;"/></a>
 			</div>
+		</section>
+		<!-- ########################################################################################## -->                   
+		<section>
+			<section id="quesaco-1" >
+				<h2>Quèsaco ?!</h2>
+			</section>
+			<section id="quesaco-2" >
+				<h3>On utilise</h3>
+				<ul>
+					<li>Photoshop</li>
+					<li>Des pdf</li>
+					<li>Des ppt</li>
+					<li>Des docs</li>
+					<li>...</li>
+				</ul>
+			</section>
+			<section id="quesaco-3" >
+				<img src="images/captain_obvious.jpg" style="" />
+			</section>
+		</section>
+		<!-- ########################################################################################## -->
+		<section>
+			<section id="avocode-1">
+				<h3>Avocode</h3>
+			</section>
 
-		</div>
+			<section id="avocode-2">
+				<img src="images/main-visual.png" style="width: 630px; margin-top: -10px;" />
+			</section>
 
-		<script src="reveal.js/lib/js/head.min.js"></script>
-		<script src="reveal.js/js/reveal.js"></script>
+			<section id="avocode-3">
+				<h3>Outils</h3>
+				<div style="float: left; width: 50%;">
+					<ul>
+						<li>Déplacement</li>
+						<li>Sélection</li>
+						<li>Mesures</li>
+					</ul>
+				</div>
+				<div style="float: left; width: 50%;">
+					<img src="images/measure.png"/>
+				</div>
+			</section>
 
-		<script>
+			<section id="avocode-4">
+				<div style="float: left; width: 50%;">
+					<ul>
+						<li>Color picker</li>
+						<li>Slice</li>
+						<li>Export</li>
+					</ul>
+				</div>
+				<div style="float: left; width: 50%;">
+					<img src="images/code-panel.png"/>
+				</div>
+			</section>
 
-			// Full list of configuration options available at:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
+			<section id="avocode-5">
+				<h3>Notes</h3>
+				<img src="images/note.png" style="width: 510px;" />
+			</section>
+
+			<section id="avocode-6">
+				<h3>Version control</h3>
+				<img src="images/version-control.png" style="width: 550px;" />
+			</section>
+
+			<section id="avocode-7">
+				<h3>Features</h3>
+				<img style="vertical-align: middle;" src="images/cloud.png"/>
+				<img style="vertical-align: middle; margin: 0 20px;" src="images/slack.png"/>
+				<img style="vertical-align: middle;" src="images/offline.png"/>
+			</section>
+
+			<section id="avocode-8">
+				<h3>Rien n'est parfait</h3>
+				<img style="height: 220px; display: inline-block; vertical-align: middle;" src="images/facepalm.jpg"/>
+				<img style="height: 220px; display: inline-block; vertical-align: middle;" src="images/fail-export.jpg"/>
+			</section>
+
+			<section id="avocode-9">
+				<h3>En bref</h3>
+				<ul>
+					<li>Très bon outil pour centraliser</li>
+					<li>Solution payante...</li>
+					<li>Invision ?</li>
+				</ul>
+			</section>
+		</section>
+		<!-- ########################################################################################## -->
+		<section id="conclusion">
+			<h2>Conclusion #punchline</h2>
+			<p>
+				...
+			</p>
+		</section>
+		<!-- ########################################################################################## -->
+	</div><!-- ./slides -->
+</div><!-- ./reveal -->
 
 
-				transition: 'convex', // none/fade/slide/convex/concave/zoom
+	<script src="reveal.js/lib/js/head.min.js"></script>
+	<script src="reveal.js/js/reveal.js"></script>
+	<script>
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			history: true,
+			center: true,
+			transition: 'convex', // none/fade/slide/convex/concave/zoom
+			// Optional reveal.js plugins
+			dependencies: [
+				{ src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				{ src: 'reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+				{ src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+				{ src: 'reveal.js/plugin/notes/notes.js', async: true }
+			]
+		});
+	</script>
 
-				// Optional reveal.js plugins
-				dependencies: [
-					{ src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
-					{ src: 'reveal.js/plugin/notes/notes.js', async: true }
-				]
-			});
-
-		</script>
-
-	</body>
+</body>
 </html>
