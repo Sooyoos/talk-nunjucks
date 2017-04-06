@@ -80,11 +80,13 @@
 	<!-- Any section element inside of this container is displayed as a slide -->
 	<div class="slides">
 		<section id="debut">
-            <img src="images/nunjucks.png" style="width:300px;" />
-			<h3>Modularize HTML Using Template Engines and Gulp</h3>
+            <img src="images/nunjucks.png" style="width: 500px;" />
+			<h3>Du template full HTML, <br>sans se salir avec du php</h3>
 			<hr>
 			<p style="margin: 0; color: #ff5a5f;"><small>by</small></p>
-			<img src="images/starter/sooyoos.svg" style="width:200px; margin-top: 0;" />
+			<p style="margin: 0; line-height: 1px;"><small>Un intégrageux anonyme de :</small></p>
+			
+			<img src="images/starter/sooyoos.svg" style="width:200px; margin-top: 0;" /> 
 
 
 			<div>
@@ -101,9 +103,6 @@
 					<li>Moteur de template full html (niet PHP)</li>
 					<li>Syntaxe lourdement inspirée de Twig</li>
 					<li>Permet des imports de partials, des macros, des variables</li>
-					<li>Des ppt</li>
-					<li>Des docs</li>
-					<li>...</li>
 				</ul>
 			</section>
 		</section>
@@ -115,7 +114,7 @@
 
 			<section id="komenkonfe-2">
 				<h3>Architecture/orga fichiers</h3>
-				<ul>
+				<ul style="display: inline-block; vertical-align: middle; margin: 0 20px;">
 					<li>/root</li>
 					<li>
 						/sources
@@ -132,39 +131,48 @@
 					</li>
 				</ul>
 
-				<img src="images/arbo-exemple.png" alt="">
+				<img src="images/arbo-exemple.png" alt="" style="display: inline-block; vertical-align: middle; margin: 0 20px;">
 			</section>
 
 			<section id="komenkonfe-3">
-				<h3>Gulp</h3>
-				<p>Grosso merdo (boring code ex)</p>
-				<pre><code data-trim data-noescape>
-					/* plugins */
-					/* ... */
-					var nunjucksRender = require('gulp-nunjucks-render');
+				<h3>Gulp ~</h3>
+				<pre><code data-trim data-noescape><!--
+				-->/* plugins */
+<!--            -->/* ... */
+<!--            -->var nunjucksRender = require('gulp-nunjucks-render');
 
-					/* paths */
-					var paths = {
-					    /* ... */
-					    nunjucksPages:'../sources/pages/**/*.+(html|nunjucks)',
-					    nunjucksTemplates:'../sources/templates',
-					    nunjucksDest:'..',
-					    /* ... */
-					};
-					
-					// html templating
-					gulp.task('nunjucks', function() {
-					  // Gets .html and .nunjucks files in pages
-					  return gulp.src(paths.nunjucksPages)
-					        .pipe(plumber(plumberErrorHandler))
-					  // Renders template with nunjucks
-					  .pipe(nunjucksRender({
-					      path: [paths.nunjucksTemplates]
-					    }))
-					  // output files in app folder
-					  .pipe(gulp.dest(paths.nunjucksDest))
-					});
+<!--            -->/* paths */
+<!--            -->var paths = {
+<!--            -->    /* ... */
+<!--            -->    nunjucksPages:'../sources/pages/**/*.+(html|nunjucks)',
+<!--            -->    nunjucksTemplates:'../sources/templates',
+<!--            -->    nunjucksDest:'..',
+<!--            -->    /* ... */
+<!--            -->};
+<!--            --></code></pre>
+				<pre><code data-trim data-noescape><!--
+				-->// html templating
+<!--            -->gulp.task('nunjucks', function() {
+<!--            -->  // Gets .html and .nunjucks files in pages
+<!--            -->  return gulp.src(paths.nunjucksPages)
+<!--            -->        .pipe(plumber(plumberErrorHandler))
+<!--            -->  // Renders template with nunjucks
+<!--            -->  .pipe(nunjucksRender({
+<!--            -->      path: [paths.nunjucksTemplates]
+<!--            -->    }))
+<!--            -->  // output files in app folder
+<!--            -->  .pipe(gulp.dest(paths.nunjucksDest))
+<!--            -->});
 				</code></pre>
+			</section>
+			<section id="komenkonfe-4">
+				<ul style="display: inline-block; vertical-align: middle; margin: 0 20px;">
+					<li>index.nunjuck, va extends layout</li>
+					<li>layout, va faire appel aux partials header/footer + les éventuels maccro ou partial qu'il inclus</li>
+					<li>le tout sera compilé dans un .html à la racine du projet (ou autre dossier selon la config</li>
+				</ul>
+
+				<img src="images/arbo-exemple.png" alt="" style="display: inline-block; vertical-align: middle; margin: 0 20px;">
 			</section>
 		</section>
 		<!-- ########################################################################################## -->
@@ -188,15 +196,15 @@
 
 			<section id="safekoi-3">
 				<h3>Des imports avec passages de paramètres (=>macros)</h3>
-				<pre><code data-trim data-noescape>
-                    {% import 'macros/formule-selection.nunjucks' as recap_formule %}
-                    {{ 
-                        recap_formule.echo(
-                            editable=false,
-                            hasPromo=true,
-                            codePromo="promo"
-                        )
-                    }}
+				<pre><code data-trim data-noescape><!--
+				-->{% import 'macros/formule-selection.nunjucks' as recap_formule %}
+<!--            -->{{ 
+<!--            -->    recap_formule.echo(
+<!--            -->        editable=false,
+<!--            -->        hasPromo=true,
+<!--            -->        codePromo="promo"
+<!--            -->    )
+<!--            -->}}
 				</code></pre>
 			</section>
 		</section>
